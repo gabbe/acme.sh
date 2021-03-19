@@ -134,7 +134,7 @@ _loopia_get_records() {
         <value><string>%s</string></value>
       </param>
     </params>
-  </methodCall>' $LOOPIA_User $Encoded_Password "$domain" "$sub_domain")
+  </methodCall>' $LOOPIA_User "$Encoded_Password" "$domain" "$sub_domain")
 
   response="$(_post "$xml_content" "$LOOPIA_Api" "" "POST")"
   if ! _contains "$response" "<array>"; then
@@ -163,7 +163,7 @@ _get_root() {
     <value><string>%s</string></value>
    </param>
   </params>
-  </methodCall>' $LOOPIA_User $Encoded_Password)
+  </methodCall>' $LOOPIA_User "$Encoded_Password")
 
   response="$(_post "$xml_content" "$LOOPIA_Api" "" "POST")"
   while true; do
@@ -227,7 +227,7 @@ _loopia_add_record() {
         </struct>
       </param>
     </params>
-  </methodCall>' $LOOPIA_User $Encoded_Password "$domain" "$sub_domain" "$txtval")
+  </methodCall>' $LOOPIA_User "$Encoded_Password" "$domain" "$sub_domain" "$txtval")
 
   response="$(_post "$xml_content" "$LOOPIA_Api" "" "POST")"
 
@@ -256,7 +256,7 @@ _sub_domain_exists() {
         <value><string>%s</string></value>
       </param>
     </params>
-  </methodCall>' $LOOPIA_User $Encoded_Password "$domain")
+  </methodCall>' $LOOPIA_User "$Encoded_Password" "$domain")
 
   response="$(_post "$xml_content" "$LOOPIA_Api" "" "POST")"
 
@@ -291,7 +291,7 @@ _loopia_add_sub_domain() {
         <value><string>%s</string></value>
       </param>
     </params>
-  </methodCall>' $LOOPIA_User $Encoded_Password "$domain" "$sub_domain")
+  </methodCall>' $LOOPIA_User "$Encoded_Password" "$domain" "$sub_domain")
 
   response="$(_post "$xml_content" "$LOOPIA_Api" "" "POST")"
 
@@ -303,11 +303,11 @@ _loopia_add_sub_domain() {
 }
 
 _xml_encode() {
-	encoded_string=$1
-	encoded_string=$(echo "$encoded_string" | sed 's/&/\&amp;/')
-	encoded_string=$(echo "$encoded_string" | sed 's/</\&lt;/')
-	encoded_string=$(echo "$encoded_string" | sed 's/>/\&gt;/')
-	encoded_string=$(echo "$encoded_string" | sed 's/\"/\&quot;/')
-	encoded_string=$(echo "$encoded_string" | sed "s/'/\&apos;/")
-	printf $encoded_string
+  encoded_string=$1
+  encoded_string=$(echo "$encoded_string" | sed 's/&/\&amp;/')
+  encoded_string=$(echo "$encoded_string" | sed 's/</\&lt;/')
+  encoded_string=$(echo "$encoded_string" | sed 's/>/\&gt;/')
+  encoded_string=$(echo "$encoded_string" | sed 's/\"/\&quot;/')
+  encoded_string=$(echo "$encoded_string" | sed "s/'/\&apos;/")
+  printf "..%s.." "$encoded_string"
 }
