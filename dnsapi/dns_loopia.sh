@@ -309,5 +309,5 @@ _xml_encode() {
   encoded_string=$(echo "$encoded_string" | sed 's/>/\&gt;/')
   encoded_string=$(echo "$encoded_string" | sed 's/\"/\&quot;/')
   encoded_string=$(echo "$encoded_string" | sed "s/'/\&apos;/")
-  printf "..%s.." "$encoded_string"
+  printf "%s" "$encoded_string"
 }
