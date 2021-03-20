@@ -101,7 +101,7 @@ _loopia_load_config() {
     return 1
   fi
 
-  Encoded_Password=$(_xml_encode $LOOPIA_Password)
+  Encoded_Password=$(_xml_encode "$LOOPIA_Password")
   return 0
 }
 
